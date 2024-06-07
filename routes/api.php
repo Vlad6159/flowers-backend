@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+Route::get('/data',[ProductsController::class,'getAllProductsAndCategories']);
 Route::post('/user/code', [UserController::class, 'createOrUpdateUserWithVerifyCode']);
 Route::post('/user/code/check', [UserController::class, 'verifyUserAndUpdateVerifyCode']);
