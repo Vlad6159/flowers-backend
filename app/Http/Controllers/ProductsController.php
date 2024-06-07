@@ -15,7 +15,7 @@ class ProductsController extends Controller
      */
     public function getAllProductsAndCategories(): JsonResponse
     {
-        $products = Product::all();
+        $products = Product::with('category')->get();
         $categories = Category::all();
 
         if (!$products->isEmpty()) {
