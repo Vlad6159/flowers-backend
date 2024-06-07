@@ -23,6 +23,7 @@ class ProductsController extends Controller
                 'success' => true,
                 'message' => 'Returned array of products',
                 'products' => $products,
+                'categories' => $categories
             ]);
         }
         return response()->json([
