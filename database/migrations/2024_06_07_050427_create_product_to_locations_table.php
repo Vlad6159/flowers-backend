@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('product_to_locations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('location_id')->constrained('locations');
+            $table->integer('count');
             $table->timestamps();
         });
     }

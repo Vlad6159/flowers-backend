@@ -64,4 +64,9 @@ class UserController extends Controller
             'error' => 'Неправильный код'
         ],400);
     }
+
+    public function addToCart()
+    {
+        
+    }
 }

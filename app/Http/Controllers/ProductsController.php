@@ -16,14 +16,12 @@ class ProductsController extends Controller
     public function getAllProductsAndCategories(): JsonResponse
     {
         $products = Product::with('category')->get();
-        $categories = Category::all();
 
         if (!$products->isEmpty()) {
             return response()->json([
                 'success' => true,
                 'message' => 'Returned array of products',
                 'products' => $products,
-                'categories' => $categories
             ]);
         }
         return response()->json([

@@ -19,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/data',[ProductsController::class,'getAllProductsAndCategories']);
 Route::post('/user/code', [UserController::class, 'createOrUpdateUserWithVerifyCode']);
 Route::post('/user/code/check', [UserController::class, 'verifyUserAndUpdateVerifyCode']);
+Route::post('/user/cart',[UserController::class, 'addToCart']);
