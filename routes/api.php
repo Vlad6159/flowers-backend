@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Middleware\CheckToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,6 @@ Route::get('/user',[UserController::class,'getUserData']);
 
 Route::post('/user/code', [UserController::class, 'createOrUpdateUserWithVerifyCode']);
 Route::post('/user/code/check', [UserController::class, 'verifyUserAndUpdateVerifyCode']);
-Route::middleware('checkToken')->get('/auth', function (Request $request) {
+Route::middleware(CheckToken::class)->get('/auth', function (Request $request) {
     Route::get('/user',[UserController::class,'getUserData']);
 });
