@@ -22,10 +22,6 @@ class CheckToken
         $tokenChecked = PersonalAccessToken::findToken($token);
         $user = $tokenChecked->tokenable();
 
-        if (!$user) {
-            return response()->json(['error' => 'Invalid token'], 401);
-        }
-
         // Если нужно, вы можете сохранить пользователя в объекте запроса для дальнейшего использования
         $request->user = $user;
 
