@@ -94,9 +94,6 @@ class UserController extends Controller
 //                'success' => false
 //            ]);
 //        }
-        return response()->json([
-                'success' => false,
-                'user' => $request->user,
-            ]);
+        dd($request);
     }
 }
