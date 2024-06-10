@@ -18,10 +18,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/data',[ProductsController::class,'getAllProductsAndCategories']);
-Route::get('/user',[UserController::class,'getUserData']);
-
 Route::post('/user/code', [UserController::class, 'createOrUpdateUserWithVerifyCode']);
 Route::post('/user/code/check', [UserController::class, 'verifyUserAndUpdateVerifyCode']);
-Route::middleware(CheckToken::class)->get('/auth', function (Request $request) {
-    Route::get('/user',[UserController::class,'getUserData']);
+Route::middleware([CheckToken::class])->group(function () {
+    // Маршрут /auth
+    Route::get('/auth', function () {
+        return response()->json(['message' => 'Authenticated']);
+    });
+    // Вложенные маршруты, доступные после успешной аутентификации
+    Route::get('/auth/user', [UserController::class, 'getUserData']);
 });
