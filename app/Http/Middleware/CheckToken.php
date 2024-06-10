@@ -21,9 +21,11 @@ class CheckToken
 
         $tokenChecked = PersonalAccessToken::findToken($token);
         $user = $tokenChecked->tokenable();
+        $user1 = $tokenChecked->tokenable_id;
 
         // Если нужно, вы можете сохранить пользователя в объекте запроса для дальнейшего использования
         $request->user = $user;
+        $request->user1 = $user1;
 
         return $next($request);
     }
