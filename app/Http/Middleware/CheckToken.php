@@ -16,7 +16,7 @@ class CheckToken
             return response()->json(['error' => 'Token is missing'], 401);
         }
 
-        $user = User::query()->where('api_token', $token)->first();
+        $user = User::tokens()->where('token', $token)->firs t();
 
         if (!$user) {
             return response()->json(['error' => 'Invalid token'], 401);
