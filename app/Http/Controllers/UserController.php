@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Favorite;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -65,8 +67,23 @@ class UserController extends Controller
         ],400);
     }
 
-    public function addToCart()
+    public function getUserData(User $user)
     {
-        
+        $userCart = Cart::query()->where([
+            'user_id' => $user->id
+        ])->get();
+
+        $userFavorite = Favorite::query()->where([
+            'user_id' => $user->id
+        ])->get();
+
+        return response()->json([
+            'success' => true,
+            'data' => [
+                'user' => $user,
+                'cart' => $userCart,
+                'favorite' => $userFavorite
+            ]
+        ]);
     }
 }
