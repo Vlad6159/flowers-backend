@@ -68,7 +68,7 @@ class UserController extends Controller
         ],400);
     }
 
-    public function getUserData(User $user)
+    public function getUserData(Request $request)
     {
 //        if($user){
 //            $userCart = Cart::query()->where([
@@ -95,7 +95,7 @@ class UserController extends Controller
 //        }
         return response()->json([
                 'success' => false,
-                'user' => $user
+                'user' => $request->user
             ]);
     }
 }
