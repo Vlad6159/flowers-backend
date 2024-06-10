@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/data',[ProductsController::class,'getAllProductsAndCategories']);
 Route::post('/user/code', [UserController::class, 'createOrUpdateUserWithVerifyCode']);
 Route::post('/user/code/check', [UserController::class, 'verifyUserAndUpdateVerifyCode']);
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(CheckToken::class)->group(function () {
     // Маршрут /auth
     Route::get('/auth', function () {
         return response()->json(['message' => 'Authenticated']);
