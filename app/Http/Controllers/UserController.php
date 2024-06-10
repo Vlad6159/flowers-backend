@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 use function Symfony\Component\String\s;
 
 /**
@@ -70,6 +71,7 @@ class UserController extends Controller
 
     public function getUserData(Request $request)
     {
+        $hash = Hash::check('5324d3eccc2b10da918707c6942b27410458ec42b8740e03afb778f28fe1506a','3|GGDFfKFQ8YXF1UxDStxIfVUYb8lmSJiT8e1YgVeS2e9532ef');
 //        if($user){
 //            $userCart = Cart::query()->where([
 //                'user_id' => $user->id
@@ -95,7 +97,8 @@ class UserController extends Controller
 //        }
         return response()->json([
                 'success' => false,
-                'user' => $request->user
+                'user' => $request->user,
+                'hash' => $hash
             ]);
     }
 }
