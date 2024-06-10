@@ -25,7 +25,7 @@ class CheckToken
 
         // Если нужно, вы можете сохранить пользователя в объекте запроса для дальнейшего использования
         $request->user = $user;
-        $request->user1 = $user1;
+        dd($user);
 
         return $next($request);
     }
