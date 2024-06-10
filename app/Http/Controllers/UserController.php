@@ -72,7 +72,7 @@ class UserController extends Controller
     public function getUserData(Request $request)
     {
         $user = $request->user;
-        if($user){
+
             $userCart = Cart::query()->where([
                 'user_id' => $user->id
             ])->get();
@@ -89,11 +89,5 @@ class UserController extends Controller
                     'favorite' => $userFavorite
                 ]
             ]);
-        }
-        else{
-            return response()->json([
-                'success' => false
-            ]);
-        }
     }
 }
