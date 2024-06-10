@@ -82,9 +82,7 @@ class UserController extends Controller
 
             return response()->json([
                 'success' => true,
-                'user' => $user,
-                'cart' => $userCart,
-                'favorite' => $userFavorite
+                'user' => $user
             ]);
     }
 }
