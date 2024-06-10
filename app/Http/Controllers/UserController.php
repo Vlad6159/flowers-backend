@@ -72,13 +72,13 @@ class UserController extends Controller
     public function getUserData(Request $request)
     {
         $user = $request->user;
-            $userCart = Cart::query()->where([
-                'user_id' => $user->id
-            ])->get();
-
-            $userFavorite = Favorite::query()->where([
-                'user_id' => $user->id
-            ])->get();
+//            $userCart = Cart::query()->where([
+//                'user_id' => $user->id
+//            ])->get();
+//
+//            $userFavorite = Favorite::query()->where([
+//                'user_id' => $user->id
+//            ])->get();
 
             return response()->json([
                 'success' => true,
