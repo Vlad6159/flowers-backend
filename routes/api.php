@@ -27,4 +27,6 @@ Route::middleware(CheckToken::class)->group(function () {
     });
     // Вложенные маршруты, доступные после успешной аутентификации
     Route::get('/auth/user', [UserController::class, 'getUserData']);
+    Route::get('/auth/user/cart', [UserController::class, 'getUserCart']);
+    Route::get('/auth/user/favorite', [UserController::class, 'getUserFavorite']);
 });

@@ -72,17 +72,43 @@ class UserController extends Controller
     public function getUserData(Request $request)
     {
         $user = $request->user;
-//            $userCart = Cart::query()->where([
-//                'user_id' => $user->id
-//            ])->get();
-//
-//            $userFavorite = Favorite::query()->where([
-//                'user_id' => $user->id
-//            ])->get();
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+        ]);
+    }
 
+    public function getUserCart(Request $request)
+    {
+        $user = $request->user;
+        $cart = Cart::query()->where('user_id',$user->id)->get();
+
+        if($cart){
             return response()->json([
                 'success' => true,
-                'user' => $user
+                'cart' => $cart,
             ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'У пользователя нет товаров в корзине'
+        ]);
+    }
+
+    public function getUserFavorite(Request $request)
+    {
+        $user = $request->user;
+        $favorite = Cart::query()->where('user_id',$user->id)->get();
+        if($favorite){
+            return response()->json([
+                'success' => true,
+                'cart' => $favorite,
+            ]);
+        }
+        return response()->json([
+            'success' => false,
+            'message' => 'У пользователя нет товаров в избранном'
+        ]);
+
     }
 }
