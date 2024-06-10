@@ -21,6 +21,6 @@ Route::get('/user',[UserController::class,'getUserData']);
 
 Route::post('/user/code', [UserController::class, 'createOrUpdateUserWithVerifyCode']);
 Route::post('/user/code/check', [UserController::class, 'verifyUserAndUpdateVerifyCode']);
-Route::middleware('checkToken')->get('/api/auth', function (Request $request) {
-    Route::get('/data',[UserController::class,'getUserData']);
+Route::middleware('checkToken')->get('/auth', function (Request $request) {
+    Route::get('/user',[UserController::class,'getUserData']);
 });
