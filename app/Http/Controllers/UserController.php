@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
+use SmsAero\SmsAeroMessage;
 use function Symfony\Component\String\s;
 
 /**
@@ -36,9 +37,9 @@ class UserController extends Controller
         $verify_code = generateVerifyCode();
         $user = User::query()->updateOrCreate(['tel' => $tel],['verify_code' => $verify_code]);
 
-        /*Создание сообщения с кодом для авторизации*/
+//        /*Создание сообщения с кодом для авторизации*/
 //        $smsAeroMessage = new SmsAeroMessage('ilyushkin.vlad@mail.ru', 'VvM_8FFC9btzO_Hkaxew3-zEIH3PwLxE');
-//        $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш код для авторизации:' . $randNumber, 'sign' => 'SMS Aero']);
+//        $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш код для авторизации:' . $verify_code, 'sign' => 'SMS Aero']);
 
         return response()->json([
             'success' => true,
@@ -109,6 +110,5 @@ class UserController extends Controller
             'success' => false,
             'message' => 'У пользователя нет товаров в избранном'
         ]);
-
     }
 }
