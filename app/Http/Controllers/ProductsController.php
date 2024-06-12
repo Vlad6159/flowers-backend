@@ -32,7 +32,7 @@ class ProductsController extends Controller
 
     public function getProductById($productId)
     {
-        $product = Product::query()->find($productId)->with('category')->first();
+        $product = Product::query()->find($productId)->with('category')->get();
         return response()->json([
             'success' => true,
             'message' => 'Returned product',
