@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/data',[ProductsController::class,'getAllProductsAndCategories']);
+Route::get('/product/{id}',[ProductsController::class,'getProductById']);
 Route::post('/user/code', [UserController::class, 'createOrUpdateUserWithVerifyCode']);
 Route::post('/user/code/check', [UserController::class, 'verifyUserAndUpdateVerifyCode']);
 Route::middleware(CheckToken::class)->group(function () {
