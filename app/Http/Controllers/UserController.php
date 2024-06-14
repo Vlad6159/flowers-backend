@@ -37,9 +37,9 @@ class UserController extends Controller
         $verify_code = generateVerifyCode();
         $user = User::query()->updateOrCreate(['tel' => $tel],['verify_code' => $verify_code]);
 
-//        /*Создание сообщения с кодом для авторизации*/
-//        $smsAeroMessage = new SmsAeroMessage('ilyushkin.vlad@mail.ru', 'VvM_8FFC9btzO_Hkaxew3-zEIH3PwLxE');
-//        $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш код для авторизации:' . $verify_code, 'sign' => 'SMS Aero']);
+        /*Создание сообщения с кодом для авторизации*/
+        $smsAeroMessage = new SmsAeroMessage('ilyushkin.vlad@mail.ru', 'VvM_8FFC9btzO_Hkaxew3-zEIH3PwLxE');
+        $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш код для авторизации:' . $verify_code, 'sign' => 'Радуга цветов']);
 
         return response()->json([
             'success' => true,
@@ -79,36 +79,48 @@ class UserController extends Controller
         ]);
     }
 
-    public function getUserCart(Request $request)
+    public function updateUserData(Request $request)
     {
         $user = $request->user;
-        $cart = Cart::query()->where('user_id',$user->id)->get();
-
-        if($cart){
-            return response()->json([
-                'success' => true,
-                'cart' => $cart,
-            ]);
-        }
+        $user->update([
+            'surname' => $request->surname,
+            'name' => $request->name,
+        ]);
         return response()->json([
-            'success' => false,
-            'message' => 'У пользователя нет товаров в корзине'
+            'success' => true,
+            'message' => 'Данные обновились'
         ]);
     }
-
-    public function getUserFavorite(Request $request)
-    {
-        $user = $request->user;
-        $favorite = Cart::query()->where('user_id',$user->id)->get();
-        if($favorite){
-            return response()->json([
-                'success' => true,
-                'cart' => $favorite,
-            ]);
-        }
-        return response()->json([
-            'success' => false,
-            'message' => 'У пользователя нет товаров в избранном'
-        ]);
-    }
+//    public function getUserCart(Request $request)
+//    {
+//        $user = $request->user;
+//        $cart = Cart::query()->where('user_id',$user->id)->get();
+//
+//        if($cart){
+//            return response()->json([
+//                'success' => true,
+//                'cart' => $cart,
+//            ]);
+//        }
+//        return response()->json([
+//            'success' => false,
+//            'message' => 'У пользователя нет товаров в корзине'
+//        ]);
+//    }
+//
+//    public function getUserFavorite(Request $request)
+//    {
+//        $user = $request->user;
+//        $favorite = Cart::query()->where('user_id',$user->id)->get();
+//        if($favorite){
+//            return response()->json([
+//                'success' => true,
+//                'cart' => $favorite,
+//            ]);
+//        }
+//        return response()->json([
+//            'success' => false,
+//            'message' => 'У пользователя нет товаров в избранном'
+//        ]);
+//    }
 }
