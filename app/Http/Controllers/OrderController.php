@@ -23,7 +23,7 @@ class OrderController extends Controller
             Product_to_Order::query()->create([
                 'product_id' => $product['id'],
                 'order_id' => $order['id'],
-                'count' => $product['count'],
+                'count' => $product['count'] ?? 1,
             ]);
             $cost += $product['count'] * $product['price'];
         }
