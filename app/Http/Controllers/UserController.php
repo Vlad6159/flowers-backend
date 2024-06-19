@@ -91,36 +91,4 @@ class UserController extends Controller
             'message' => 'Данные обновились'
         ]);
     }
-//    public function getUserCart(Request $request)
-//    {
-//        $user = $request->user;
-//        $cart = Cart::query()->where('user_id',$user->id)->get();
-//
-//        if($cart){
-//            return response()->json([
-//                'success' => true,
-//                'cart' => $cart,
-//            ]);
-//        }
-//        return response()->json([
-//            'success' => false,
-//            'message' => 'У пользователя нет товаров в корзине'
-//        ]);
-//    }
-//
-//    public function getUserFavorite(Request $request)
-//    {
-//        $user = $request->user;
-//        $favorite = Cart::query()->where('user_id',$user->id)->get();
-//        if($favorite){
-//            return response()->json([
-//                'success' => true,
-//                'cart' => $favorite,
-//            ]);
-//        }
-//        return response()->json([
-//            'success' => false,
-//            'message' => 'У пользователя нет товаров в избранном'
-//        ]);
-//    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Middleware\CheckToken;
@@ -17,16 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/data',[ProductsController::class,'getAllProductsAndCategories']);
-Route::get('/product/{id}',[ProductsController::class,'getProductById']);
+Route::get('/products',[ProductsController::class,'getAllProductsAndCategories']);
 Route::post('/user/code', [UserController::class, 'createOrUpdateUserWithVerifyCode']);
 Route::post('/user/code/check', [UserController::class, 'verifyUserAndUpdateVerifyCode']);
 Route::middleware(CheckToken::class)->group(function () {
-    // Маршрут /auth
     Route::get('/auth', function () {
         return response()->json(['message' => 'Authenticated']);
     });
-    // Вложенные маршруты, доступные после успешной аутентификации
-    Route::get('/auth/user', [UserController::class, 'getUserData']);
-    Route::post('/auth/user/update', [UserController::class, 'updateUserData']);
+    Route::get('/user', [UserController::class, 'getUserData']);
+    Route::post('/user/update', [UserController::class, 'updateUserData']);
+    Route::post('/user/order',[OrderController::class,'makeOrder']);
 });

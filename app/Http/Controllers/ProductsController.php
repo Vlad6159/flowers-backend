@@ -29,14 +29,4 @@ class ProductsController extends Controller
             'message' => 'Request for get products failed',
         ]);
     }
-
-    public function getProductById($productId)
-    {
-        $product = Product::with('category')->find($productId);
-        return response()->json([
-            'success' => true,
-            'message' => 'Returned product',
-            'product' => $product,
-        ]);
-    }
 }
