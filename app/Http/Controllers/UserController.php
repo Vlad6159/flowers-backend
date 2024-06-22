@@ -40,7 +40,7 @@ class UserController extends Controller
         /*Создание сообщения с кодом для авторизации*/
         $smsAeroMessage = new SmsAeroMessage('ilyushkin.vlad@mail.ru', 'VvM_8FFC9btzO_Hkaxew3-zEIH3PwLxE');
         $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш код для авторизации:' . $verify_code, 'sign' => 'SMSAero']);
-//        https://ilyushkin.vlad@mail.ru:api_key@gate.smsaero.ru/v2/sms/send?number=79000000000&text=youtext&sign=SMSAero
+
         return response()->json([
             'success' => true,
             'message' => 'Пользователю отправлен код доступа'
