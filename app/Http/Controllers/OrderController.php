@@ -26,9 +26,9 @@ class OrderController extends Controller
         ]);
         foreach ($cart as $product) {
             Product_to_Order::query()->create([
-                'product_id' => $product['id'],
-                'order_id' => $order['id'],
-                'count' => $product['count'] ?? 1,
+                'product_id' => $product->id,
+                'order_id' => $order->id,
+                'count' => $product->count ?? 1,
             ]);
         }
         $tel = $request->user->tel;
