@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\Product_to_Order;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use SmsAero\SmsAeroMessage;
 
 class OrderController extends Controller
@@ -40,11 +41,16 @@ class OrderController extends Controller
         ]);
     }
 
-    public function orderCheck()
+    public function getUserOrderHistory(Request $request)
     {
+        $userId = $request->user->id;
+        $orders = Order::with('productToOrders.product')
+            ->where('user_id', $userId)
+            ->get();
         return response()->json([
             'success' => true,
-            'message' => 'пришло',
+            'status' => 200,
+            'data' => $orders
         ]);
     }
 }

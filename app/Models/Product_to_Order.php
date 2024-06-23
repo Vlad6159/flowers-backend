@@ -12,4 +12,14 @@ class Product_to_Order extends Model
     protected $guarded = ['id'];
 
     protected $table = 'product_to_order';
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
