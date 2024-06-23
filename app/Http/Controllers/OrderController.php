@@ -23,7 +23,7 @@ class OrderController extends Controller
         $order = Order::query()->create([
             'cost' => $cost,
             'user_id' => $request->user->id
-        ])->get();
+        ]);
         foreach ($cart as $product) {
             Product_to_Order::query()->create([
                 'product_id' => $product['id'],
