@@ -28,5 +28,4 @@ Route::middleware(CheckToken::class)->group(function () {
     Route::get('/user', [UserController::class, 'getUserData']);
     Route::post('/user/update', [UserController::class, 'updateUserData']);
     Route::post('/user/order',[OrderController::class,'makeOrder']);
-    Route::get('/user/order',[OrderController::class,'orderCheck']);
 });
