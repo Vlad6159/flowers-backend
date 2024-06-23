@@ -18,16 +18,17 @@ class OrderController extends Controller
             ]);
         }
         $order = Order::query()->create()->get();
-        $cost = 0;
+        $cost = $request->price;
         foreach ($cart as $product) {
             Product_to_Order::query()->create([
                 'product_id' => $product['id'],
                 'order_id' => $order['id'],
                 'count' => $product['count'] ?? 1,
             ]);
-            $cost += $product['count'] * $product['price'];
         }
         $order->update(['cost' => $cost]);
+//        $smsAeroMessage = new SmsAeroMessage('ilyushkin.vlad@mail.ru', 'VvM_8FFC9btzO_Hkaxew3-zEIH3PwLxE');
+//        $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш заказ оформлен номер заказа' . $order->id, 'sign' => 'SMSAero']);
         return response()->json([
             'success' => true,
             'message' => 'Заказ оформлен'
