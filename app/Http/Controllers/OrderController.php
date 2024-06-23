@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product_to_Order;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
 class OrderController extends Controller
 {
@@ -17,8 +19,11 @@ class OrderController extends Controller
                 'message' => 'Корзина пуста, чтобы оформить заказ нужно добавить товаров.'
             ]);
         }
-        $order = Order::query()->create()->get();
         $cost = $request->price;
+        $order = Order::query()->create([
+            'cost' => $cost,
+            'user_id' => $request->user->id
+        ])->get();
         foreach ($cart as $product) {
             Product_to_Order::query()->create([
                 'product_id' => $product['id'],
@@ -26,12 +31,19 @@ class OrderController extends Controller
                 'count' => $product['count'] ?? 1,
             ]);
         }
-        $order->update(['cost' => $cost]);
 //        $smsAeroMessage = new SmsAeroMessage('ilyushkin.vlad@mail.ru', 'VvM_8FFC9btzO_Hkaxew3-zEIH3PwLxE');
 //        $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш заказ оформлен номер заказа' . $order->id, 'sign' => 'SMSAero']);
         return response()->json([
             'success' => true,
             'message' => 'Заказ оформлен'
+        ]);
+    }
+
+    public function orderCheck()
+    {
+        return response()->json([
+            'success' => true,
+            'message' => 'пришло',
         ]);
     }
 }
