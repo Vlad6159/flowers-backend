@@ -10,4 +10,6 @@ class Product_to_Order extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    protected $table = 'product_to_order';
 }
