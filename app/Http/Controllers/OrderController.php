@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Product_to_Order;
 use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
+use SmsAero\SmsAeroMessage;
 
 class OrderController extends Controller
 {
@@ -31,8 +31,9 @@ class OrderController extends Controller
                 'count' => $product['count'] ?? 1,
             ]);
         }
-//        $smsAeroMessage = new SmsAeroMessage('ilyushkin.vlad@mail.ru', 'VvM_8FFC9btzO_Hkaxew3-zEIH3PwLxE');
-//        $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш заказ оформлен номер заказа' . $order->id, 'sign' => 'SMSAero']);
+        $tel = $request->user->tel;
+        $smsAeroMessage = new SmsAeroMessage('ilyushkin.vlad@mail.ru', 'VvM_8FFC9btzO_Hkaxew3-zEIH3PwLxE');
+        $response = $smsAeroMessage->send(['number' => $tel, 'text' => 'Ваш заказ оформлен номер заказа' . $order->id, 'sign' => 'SMSAero']);
         return response()->json([
             'success' => true,
             'message' => 'Заказ оформлен'
